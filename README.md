@@ -12,6 +12,9 @@ basic flask setup for new project
 ### Installing dependencies
 ```make install-deps```
 
+### Creating DB file
+```make create-db-file```
+
 ## Running
 ```make run```
 
