@@ -1,5 +1,8 @@
 all:
 
+save-deps:
+	pip freeze > requirements.txt
+
 create-venv:
 	python3 -m venv .venv
 
