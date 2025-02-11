@@ -10,8 +10,7 @@ basic flask setup for new project
 ```	. .venv/bin/activate```
 
 ### Installing dependencies
-```pip install Flask```
-
+```make install-deps```
 
 ## Running
 ```make run```
