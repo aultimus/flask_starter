@@ -13,4 +13,4 @@ assume-venv:
 	. .venv/bin/activate
 
 run:
-	flask --app flaskr run --debug
+	DB_URL="sqlite:///:memory:" flask --app flaskr run --debug
