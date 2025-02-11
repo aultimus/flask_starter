@@ -18,10 +18,9 @@ def create_app(test_config=None):
 
     app.config.from_mapping(
         SECRET_KEY="dev",
-        DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
         SQLALCHEMY_DATABASE_URI=db_url,
-        # This provides significant overheads and modifications are already tracked
-        # via SQLAlchemy events
+        # This provides significant overheads and modifications are already
+        # tracked via SQLAlchemy events
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
 
@@ -31,12 +30,6 @@ def create_app(test_config=None):
     else:
         # load the test config if passed in
         app.config.from_mapping(test_config)
-
-    # ensure the instance folder exists
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
 
     @app.route("/")
     def root():
