@@ -13,10 +13,13 @@ basic flask setup for new project
 ### Creating DB file
 ```make create-db-file```
 
-## Running
+## Running in Docker
+```make run`
+
+### Running outside of Docker
 ```	poetry shell```
 
-```make run```
+```make run-local```
 
 ## Development
 ### Dependencies
