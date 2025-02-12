@@ -22,15 +22,7 @@ def add_user(user_id: str) -> Response:
     """
     Add user record to DB.
     """
-    # Extract data from payload as JSON and suppress errors so we can control response
-    # behaviour
-    payload = request.get_json(force=True, silent=True)
-    current_app.logger.debug(f"Request payload: {payload}")
-    if payload is None:
-        current_app.logger.error("Request did not contain expected JSON payload")
-        abort(400)
-
-    user = User(user_id)
+    user = User(user_id, "", "")
     db.session.add(user)
     db.session.commit()
 
