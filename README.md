@@ -3,28 +3,26 @@ basic flask setup for new project
 
 
 ## Installation
-### Making venv
-```make venv```
+### Installing tools
+#### Poetry
+```curl -sSL https://install.python-poetry.org | python3 -```
 
-### Assume venv
-```	. .venv/bin/activate```
+```poetry self add poetry-plugin-shell```
 
-### Installing dependencies
-```make install-deps```
 
 ### Creating DB file
 ```make create-db-file```
 
 ## Running
+```	poetry shell```
+
 ```make run```
 
 ## Development
 ### Dependencies
-After assuming the virtualenv you can add a dependency via
-```pip install $PACKAGENAME```
+To add a package use:
+```poetry add $PACKAGENAME```
 
-Once you have installed the package, you can add it to the project via:
-```make save-deps```
 
 ## TODO
 Sending passwords over non TLS connections is bad, this should not be done in
