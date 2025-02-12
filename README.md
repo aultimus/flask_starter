@@ -25,3 +25,7 @@ After assuming the virtualenv you can add a dependency via
 
 Once you have installed the package, you can add it to the project via:
 ```make save-deps```
+
+## TODO
+Sending passwords over non TLS connections is bad, this should not be done in
+production.
