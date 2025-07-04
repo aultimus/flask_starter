@@ -1,3 +1,4 @@
+import logging
 import os
 
 from flask import Flask
@@ -5,6 +6,10 @@ from flask import Flask
 
 from flaskr import user
 from flaskr.extensions import db
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def create_app(test_config=None):

@@ -17,7 +17,7 @@ basic flask setup for new project
 ```make run`
 
 ### Running outside of Docker
-```	poetry shell```
+```eval $(poetry env activate)```
 
 ```make run-local```
 
