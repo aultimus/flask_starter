@@ -16,7 +16,7 @@ test:
 	docker run --rm -it --mount type=bind,src=./src/,dst=/src/ flask-starter:latest poetry run pytest -s
 
 run-local:
-	DB_URL=sqlite:///$(PWD)/file.db poetry run flask --app flaskr run --debug
+	DB_URL=sqlite:///$(PWD)/file.db poetry run flask --app flask-starter run --debug
 
 run-local-in-memory:
-	DB_URL="sqlite:///:memory:" poetry run flask --app flaskr run --debug
+	DB_URL="sqlite:///:memory:" poetry run flask --app flask-starter run --debug

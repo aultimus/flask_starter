@@ -2,16 +2,15 @@ from flask import (
     abort,
     Blueprint,
     current_app,
-    g,
     jsonify,
     make_response,
     request,
     Response,
 )
 
-# from flaskr.auth import auth
-from flaskr.extensions import db
-from flaskr.models import User
+# from flask_starter.auth import auth
+from flask_starter.extensions import db
+from flask_starter.models import User
 
 user_bp = Blueprint("user", __name__, url_prefix="/user/<string:user_id>")
 

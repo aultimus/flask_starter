@@ -1,4 +1,4 @@
-from flaskr.extensions import db
+from flask_starter.extensions import db
 
 
 class User(db.Model):  # type: ignore[name-defined]

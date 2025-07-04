@@ -17,6 +17,4 @@ COPY ./src /src
 ENV FLASK_APP="src/app.py"
 
 EXPOSE 5000
-# TODO: Use WSGI for Dockerfile and flask run in docker-compose.yml
-# e.g. CMD ["gunicorn", "-b", "0.0.0.0:5000", "src.app:app"]
-CMD ["poetry", "run", "flask", "run", "-h", "0.0.0.0", "-p", "5000"]
+CMD ["poetry", "run", "gunicorn", "-b", "0.0.0.0:5000", "src.app:app"]

@@ -4,8 +4,8 @@ import os
 from flask import Flask
 
 
-from flaskr import user
-from flaskr.extensions import db
+from flask_starter import user
+from flask_starter.extensions import db
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
