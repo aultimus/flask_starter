@@ -15,6 +15,11 @@ from flask_starter.models import User
 user_bp = Blueprint("user", __name__, url_prefix="/user/<string:user_id>")
 
 
+def foo():
+    """Dummy function to demonstrate unit testing"""
+    return 1
+
+
 @user_bp.route("", methods=["POST"])
 # @auth
 def add_user(user_id: str) -> Response:

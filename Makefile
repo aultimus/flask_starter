@@ -12,8 +12,20 @@ run:
 run-in-memory:
 	docker run --rm -it -p 5000:5000 --mount type=bind,src=./src/,dst=/src/ -e DB_URL="sqlite:///:memory:" -e FLASK_DEBUG=true flask-starter:latest
 
+unit-tests:
+	pytest tests/unit-tests/
+
+integration-tests:
+	pytest tests/integration-tests/
+
+system-tests:
+	pytest tests/system-tests/
+#	docker run --rm -it --mount type=bind,src=./src/,dst=/src/ flask-starter:latest poetry run pytest -s
+
 test:
-	docker run --rm -it --mount type=bind,src=./src/,dst=/src/ flask-starter:latest poetry run pytest -s
+	$(MAKE) unit-tests
+	$(MAKE) integration-tests
+	$(MAKE) system-tests
 
 run-local:
 	DB_URL=sqlite:///$(PWD)/file.db poetry run flask --app flask-starter run --debug
