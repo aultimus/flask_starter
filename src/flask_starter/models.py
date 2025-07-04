@@ -5,15 +5,13 @@ class User(db.Model):  # type: ignore[name-defined]
     __tablename__ = "user"
     id = db.Column(db.String(), primary_key=True)
     name = db.Column(db.String(), nullable=False)
-    password = db.Column(db.String(), nullable=False)
 
-    def __init__(self, id: int, name: str, password: str) -> None:
+    def __init__(self, id: str, name: str) -> None:
         self.id = id
         self.name = name
-        self.password = password
 
     def serialize(self) -> dict:
-        return {"id": self.id, "name": self.name, "password": self.password}
+        return {"id": self.id, "name": self.name}
 
 
 """
@@ -55,5 +53,5 @@ class Post(db.Model):  # type: ignore[name-defined]
     )
 
     def serialize(self) -> dict:
-        return {"id": self.id, "name": self.name, "password": self.password}
+        return {"id": self.id, "name": self.name}
 """

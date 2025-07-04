@@ -1,10 +1,12 @@
 FROM python:3.13-slim
 
 WORKDIR /app
+COPY pyproject.toml poetry.lock /app/
 
 # Install poetry for dependency management
 ARG POETRY_VERSION=2.0.1
 RUN pip install "poetry==${POETRY_VERSION}"
+RUN poetry install --no-root --no-interaction
 
 ENV PYTHONPATH="/app/src"
 

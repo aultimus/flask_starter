@@ -3,7 +3,6 @@ import os
 
 from flask import Flask
 
-
 from flask_starter import user
 from flask_starter.extensions import db
 
@@ -16,25 +15,23 @@ def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
 
-    try:
-        db_url = os.environ["DB_URL"]
-    except KeyError:
-        raise IOError("Could not find DB_URL in env vars")
+    # Database URL: get from env or default to local SQLite for fallback
+    db_url = os.environ.get(
+        "DB_URL", "postgresql://flask_user:flask_password@postgres:5432/flask_db"
+    )
 
     app.config.from_mapping(
         SECRET_KEY="dev",
         SQLALCHEMY_DATABASE_URI=db_url,
-        # This provides significant overheads and modifications are already
-        # tracked via SQLAlchemy events
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
 
-    if test_config is None:
-        # load the instance config, if it exists, when not testing
-        app.config.from_pyfile("config.py", silent=True)
-    else:
-        # load the test config if passed in
+    if test_config:
+        # If passed a test config dict, override everything
         app.config.from_mapping(test_config)
+    else:
+        # load instance config (optional), e.g., instance/config.py
+        app.config.from_pyfile("config.py", silent=True)
 
     @app.route("/")
     def root():
@@ -49,11 +46,13 @@ def create_app(test_config=None):
 def register_extensions(app: Flask) -> None:
     db.init_app(app)
     with app.app_context():
+        # Create tables if they don't exist
+        # Don't do this in production, use migrations instead
         db.create_all()
 
 
-config = os.environ.get("FLASK_CONFIG")
-app = create_app(config)
+# Only create the app if this file is run directly OR imported by Gunicorn
+app = create_app()
 
 if __name__ == "__main__":
     app.run(debug=True)

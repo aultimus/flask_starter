@@ -1,16 +1,13 @@
 all: build
 
-create-db-file:
-	touch file.db
+install:
+	poetry install
 
 build:
 	docker build . -t flask-starter
 
 run:
-	docker run --rm -it -p 5000:5000 --mount type=bind,src=./src/,dst=/src/ -e DB_URL="sqlite:////file.db" -e FLASK_DEBUG=true flask-starter:latest
-
-run-in-memory:
-	docker run --rm -it -p 5000:5000 --mount type=bind,src=./src/,dst=/src/ -e DB_URL="sqlite:///:memory:" -e FLASK_DEBUG=true flask-starter:latest
+	docker-compose up
 
 unit-tests:
 	pytest tests/unit-tests/
@@ -26,9 +23,3 @@ test:
 	$(MAKE) unit-tests
 	$(MAKE) integration-tests
 	$(MAKE) system-tests
-
-run-local:
-	DB_URL=sqlite:///$(PWD)/file.db poetry run flask --app flask-starter run --debug
-
-run-local-in-memory:
-	DB_URL="sqlite:///:memory:" poetry run flask --app flask-starter run --debug

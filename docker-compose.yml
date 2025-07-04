@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   flask_starter:
     build:
@@ -7,18 +9,28 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - DB_URL=sqlite:////file.db
+      # IMPORTANT: This sets your SQLAlchemy DB URL
+      - DB_URL=postgresql://flask_user:flask_password@postgres:5432/flask_db
       - FLASK_DEBUG=true
       - FLASK_APP=src/app.py
-    #depends_on:
+    depends_on:
+      - postgres
     volumes:
       - ./src:/app/src
     working_dir: /app
-    # Enable auto-reload for development
-    # Note: --reload is not available in production mode, so this is for development only.
     command: ["poetry", "run", "flask", "run", "-h", "0.0.0.0", "-p", "5000"]
     mem_limit: 1g
     cpus: 0.5
 
-volumes:
-  neo4j_data:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: flask_user
+      POSTGRES_PASSWORD: flask_password
+      POSTGRES_DB: flask_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data

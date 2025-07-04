@@ -39,8 +39,5 @@ We recommend the following VS Code extensions:
 6. Set breakpoints in your Python files as needed.
 
 ## TODO
-- Sending passwords over non TLS connections is bad, this should not be done in
-production.
-- Replace SQLLite with mysql database
-- Add stubs for unit, integration and system tests
 - Add env variable parsing
+- alembic migrations rather than using db.create_all()
