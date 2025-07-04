@@ -1,0 +1,24 @@
+services:
+  flask_starter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flask_starter
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_URL=sqlite:////file.db
+      - FLASK_DEBUG=true
+      - FLASK_APP=src/app.py
+    #depends_on:
+    volumes:
+      - ./src:/app/src
+    working_dir: /app
+    # Enable auto-reload for development
+    # Note: --reload is not available in production mode, so this is for development only.
+    command: ["poetry", "run", "flask", "run", "-h", "0.0.0.0", "-p", "5000"]
+    mem_limit: 1g
+    cpus: 0.5
+
+volumes:
+  neo4j_data:
