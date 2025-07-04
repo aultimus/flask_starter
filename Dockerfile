@@ -6,6 +6,8 @@ WORKDIR /app
 ARG POETRY_VERSION=2.0.1
 RUN pip install "poetry==${POETRY_VERSION}"
 
+ENV PYTHONPATH="/app/src"
+
 COPY src/ ./src/
 COPY --chown=1000:1000 . .
 

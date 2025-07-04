@@ -31,8 +31,6 @@ To add a package use:
 - Sending passwords over non TLS connections is bad, this should not be done in
 production.
 - Add running under debugger support
-- Stand up dev server under docker compose
-- Stand up production server as referenced in Dockerfile
 - Replace SQLLite with mysql database
 - Add stubs for unit, integration and system tests
 - Add env variable parsing

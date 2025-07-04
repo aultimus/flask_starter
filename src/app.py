@@ -50,3 +50,10 @@ def register_extensions(app: Flask) -> None:
     db.init_app(app)
     with app.app_context():
         db.create_all()
+
+
+config = os.environ.get("FLASK_CONFIG")
+app = create_app(config)
+
+if __name__ == "__main__":
+    app.run(debug=True)
