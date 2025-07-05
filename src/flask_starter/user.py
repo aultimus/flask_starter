@@ -10,6 +10,7 @@ def add_user():
     """
     Create a new user.
     """
+    print("DB URI INSIDE HANDLER:", current_app.config["SQLALCHEMY_DATABASE_URI"])
     payload = request.get_json(force=True, silent=True)
     if not payload or "id" not in payload:
         abort(400, description="Missing user ID")

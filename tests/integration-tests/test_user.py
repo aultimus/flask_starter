@@ -1,20 +1,11 @@
 import json
-import pytest
-
-from app import app as flask_app
-
-
-@pytest.fixture
-def client():
-    with flask_app.test_client() as client:
-        yield client
 
 
 def test_create_user(client):
     # Create a user
     resp = client.post(
         "/user",
-        data=json.dumps({"id": "testuser", "name": "Test User"}),
+        data=json.dumps({"id": "tesftusefr", "name": "Test User"}),
         content_type="application/json",
     )
     assert resp.status_code == 201

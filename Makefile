@@ -23,3 +23,6 @@ test:
 	$(MAKE) unit-tests
 	$(MAKE) integration-tests
 	$(MAKE) system-tests
+
+run-db:
+	docker-compose up postgres

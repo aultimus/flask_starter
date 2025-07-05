@@ -4,28 +4,39 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "Python Debugger: Flask",
             "type": "debugpy",
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "src/app.py",
+                "FLASK_APP": "src/wsgi.py",
                 "FLASK_DEBUG": "1",
-                "DB_URL": "sqlite:///file.db"
-
+                "DB_URL": "postgresql://flask_user:flask_password@localhost:5432/flask_db"
             },
             "args": [
                 "run",
-                // we are using debugpy, not flask's Werkzeug debugger
-                // so we disable it to avoid conflicts
                 "--no-debugger",
-                // reloading when under debugger is problematic
                 "--no-reload"
             ],
             "jinja": true,
-            "autoStartBrowser": false
+            "autoStartBrowser": false,
+            "justMyCode": false
+        },
+        {
+            "name": "Python: Debug Integration Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "justMyCode": false,
+            "args": [
+                "tests/integration-tests"
+            ],
+            "env": {
+                "FLASK_ENV": "testing",
+                "FLASK_DEBUG": "1"
+            },
+            "console": "integratedTerminal"
         }
     ]
 }
